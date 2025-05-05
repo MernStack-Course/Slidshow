@@ -1,0 +1,135 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slid Show</title>
+  <style>
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    .container{
+      background:linear-gradient(90deg, rgb(212, 209, 5), rgb(172, 20, 185));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      height: 100vh;
+      width: 100%;
+    }
+    .images{
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+    }
+    .item img{
+      height: 30rem;
+      width: 55rem;
+      border-radius: 10px;
+      border: 4px solid gray;
+    }
+    .item{
+      display: none;
+    }
+    .item.active{
+      display: flex;
+    }
+    .buttons{
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+    }
+    button{
+      font-size: 2.5rem;
+      height: 3rem;
+      width: 4rem;
+      background-color: rgb(16, 194, 194);
+      border: none;
+      color: white;
+      border-radius: 15px;
+      border: 2px solid rgb(241, 231, 231);
+    }
+    .directions{
+      display: flex;
+      flex-direction: row;
+      gap: 2rem;
+    }
+    .direction{
+      background-color: white;
+      width: 10rem;
+      height: 1.5rem;
+      border-radius: 15px;
+      border: 2px solid gray;
+    }
+    .activ-dir{
+      background-color: rgb(202, 8, 66);
+      width: 15rem;
+    }
+    @media screen and (max-width:1150px) {
+      .item img{
+        width: 20rem;
+        height: 20rem;
+      }
+      .direction{
+        width: 3.8rem;
+        height: 0.5rem;
+      }
+      .activ-dir{
+        background-color: red;
+        width: 6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="images">
+      <div class="item active"><img src="img/antique-cafe-bg-01.jpg" alt=""></div>
+      <div class="item"><img src="img/antique-cafe-bg-02.jpg" alt=""></div>
+      <div class="item"><img src="img/antique-cafe-bg-03.jpg" alt=""></div>
+      <div class="item"><img src="img/antique-cafe-bg-04.jpg" alt=""></div>
+    </div>
+    <div class="directions">
+      <div class="direction activ-dir"></div>
+      <div class="direction"></div>
+      <div class="direction"></div>
+      <div class="direction"></div>
+    </div>
+    <div class="buttons">
+      <button id="previous">&leftarrow;</button>
+      <button id="next">&rightarrow;</button>
+    </div>
+  </div>
+  <script>
+    const nextButton = document.getElementById("next");
+    const preButton = document.getElementById("previous");
+    const items = document.querySelectorAll(".item");
+    const directions = document.querySelectorAll(".direction");
+    let index =0;
+    nextButton.addEventListener("click", function(){
+      index++;
+      if(index > items.length -1){
+        index = 0;
+      }
+      items.forEach((item) => item.classList.remove("active"));
+      items[index].classList.add("active");
+      directions.forEach((direction) => direction.classList.remove("activ-dir"));
+      directions[index].classList.add("activ-dir")
+    })
+    preButton.addEventListener("click", () =>{
+      index--;
+      console.log(index);
+      if(index < 0){
+        index = items.length-1;
+      }
+      items.forEach((item) => item.classList.remove("active"));
+      items[index].classList.add("active");
+      directions.forEach((direction) => direction.classList.remove("activ-dir"));
+      directions[index].classList.add("activ-dir");
+    })
+  </script>
+</body>
+</html>
